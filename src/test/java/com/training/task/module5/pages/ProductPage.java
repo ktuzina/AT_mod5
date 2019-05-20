@@ -24,11 +24,13 @@ public class ProductPage extends AbstractPage {
         options.click();
         WebElement cloneBtn = driver.findElement(By.xpath(CLONE_BTN_PATH));
         cloneBtn.click();
+//        пожалуйста переделай локатор
         WebElement createCloneBtn = driver.findElement(By.xpath("/html/body/div[3]/aside[1]/div[2]/footer/button[1]"));
         createCloneBtn.click();
     }
 
     public void putToCartViaPDFDownload() {
+//        думаю изза этого ожидания можно зависнуть на долго))
         WebDriverWait wait = new WebDriverWait(driver, 800, 1000);
 
         WebElement loadingElement = driver.findElement(By.xpath(LOADING_ELEMENT_PATH));

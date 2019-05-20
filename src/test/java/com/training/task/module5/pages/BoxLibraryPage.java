@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class BoxLibraryPage extends AbstractPage {
-
+// эти локаторы не приемлимы, пожалуйста переделай в более читаемый вид
     private static String BOX_LIB_LINK_PATH = "/html/body/div[2]/div[1]/div/div[2]/nav/div/ul/li[2]/a/span";
     private static String BOX_TEMPLATE_PATH = "/html/body/div[2]/main/div/div[1]/div[6]/div/div[2]/ol/li[1]/div/div[2]/div/div/a";
 

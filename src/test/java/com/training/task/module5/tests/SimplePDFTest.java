@@ -22,6 +22,7 @@ public class SimplePDFTest {
         driver = new ChromeDriver(options);
     }
 
+//    хотелось бы увидеть относительно законченный тест, с ассертами
     @Test
     public void orderSimplePDF() throws InterruptedException {
         StartPage startPage = new StartPage(driver);
