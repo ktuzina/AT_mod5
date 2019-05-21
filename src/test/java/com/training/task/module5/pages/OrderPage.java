@@ -1,9 +1,11 @@
 package com.training.task.module5.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class OrderPage extends AbstractPage {
@@ -35,18 +37,20 @@ public class OrderPage extends AbstractPage {
 
     public boolean download1upPDFisVisible() {
         try {
-            driver.findElement(By.xpath(PDF_1UP_BTN_PATH));
+            WebDriverWait wait = new WebDriverWait(driver, 15, 1000);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath(PDF_1UP_BTN_PATH)));
             return true;
-        } catch (NoSuchElementException e) {
+        } catch (TimeoutException e) {
             return false;
         }
     }
 
     public boolean download1upCF2isVisible() {
         try {
-            driver.findElement(By.xpath(CF2_1UP_BTN_PATH));
+            WebDriverWait wait = new WebDriverWait(driver, 15, 1000);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CF2_1UP_BTN_PATH)));
             return true;
-        } catch (NoSuchElementException e) {
+        } catch (TimeoutException e) {
             return false;
         }
     }
