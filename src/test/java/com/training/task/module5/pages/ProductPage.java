@@ -14,6 +14,7 @@ public class ProductPage extends AbstractPage {
     private static String ADD_TO_CART_BTN_PATH = "//aside[contains(@class, 'simplepdf-modal')]//*[@class='modal-footer']//button[1]";
     private static String PROCEED_CHECKOUT_BTN_CLASS = "proceed-checkout";
     private static String LOADING_ELEMENT_PATH = "//div[@class=\'loader\']/img";
+    private static String CREATE_CLONE_BTN_PATH = "//span[contains(text(), 'Create Clone')]";
 
     public ProductPage(WebDriver driver) {
         super(driver);
@@ -24,14 +25,12 @@ public class ProductPage extends AbstractPage {
         options.click();
         WebElement cloneBtn = driver.findElement(By.xpath(CLONE_BTN_PATH));
         cloneBtn.click();
-//        пожалуйста переделай локатор
-        WebElement createCloneBtn = driver.findElement(By.xpath("/html/body/div[3]/aside[1]/div[2]/footer/button[1]"));
+        WebElement createCloneBtn = driver.findElement(By.xpath(CREATE_CLONE_BTN_PATH));
         createCloneBtn.click();
     }
 
     public void putToCartViaPDFDownload() {
-//        думаю изза этого ожидания можно зависнуть на долго))
-        WebDriverWait wait = new WebDriverWait(driver, 800, 1000);
+        WebDriverWait wait = new WebDriverWait(driver, 30, 1000);
 
         WebElement loadingElement = driver.findElement(By.xpath(LOADING_ELEMENT_PATH));
         wait.until(ExpectedConditions.invisibilityOf(loadingElement));

@@ -1,8 +1,10 @@
 package com.training.task.module5.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 
 public class OrderPage extends AbstractPage {
 
@@ -29,5 +31,23 @@ public class OrderPage extends AbstractPage {
     public void download1upCF2() {
         WebElement cf21UpBtn = driver.findElement(By.xpath(CF2_1UP_BTN_PATH));
         cf21UpBtn.click();
+    }
+
+    public boolean download1upPDFisVisible() {
+        try {
+            driver.findElement(By.xpath(PDF_1UP_BTN_PATH));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public boolean download1upCF2isVisible() {
+        try {
+            driver.findElement(By.xpath(CF2_1UP_BTN_PATH));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 }

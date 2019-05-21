@@ -21,8 +21,7 @@ public class SimplePDFTest {
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options);
     }
-
-//    хотелось бы увидеть относительно законченный тест, с ассертами
+    
     @Test
     public void orderSimplePDF() throws InterruptedException {
         StartPage startPage = new StartPage(driver);
@@ -44,9 +43,9 @@ public class SimplePDFTest {
         purchaseSuccessPage.goToOrderDetails();
 
         OrderPage orderPage = new OrderPage(driver);
-        Assert.assertTrue(orderPage.pageIsDisplayed(), "Order page is not opened");
-
         //download of pdf and cf2 files is blocked by W2B-1746
+        Assert.assertTrue(orderPage.download1upPDFisVisible(), "1up-PDF button doesn't appear");
+        Assert.assertTrue(orderPage.download1upCF2isVisible(), "1up-CF2 button doesn't appear");
     }
 
     @AfterClass
