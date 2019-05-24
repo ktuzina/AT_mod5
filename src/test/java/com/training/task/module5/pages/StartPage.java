@@ -9,13 +9,14 @@ public class StartPage extends AbstractPage {
         super(driver);
     }
 
-    public void openPage() throws InterruptedException {
+    public LoginPage openPage() throws InterruptedException {
 
-        String pageUrl="https://w2b-test:nae3qttWgv1axNOzlUaR@www.prinyun-tst.com";
+        String pageUrl = "https://w2b-test:nae3qttWgv1axNOzlUaR@www.prinyun-tst.com";
         driver.get(pageUrl);
 
         Thread.sleep(3000);
 
+        return new LoginPage(driver);
     }
 
 }
