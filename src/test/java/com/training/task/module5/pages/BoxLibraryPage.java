@@ -6,13 +6,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class BoxLibraryPage extends AbstractPage {
 
-    private static final String BOX_LIB_LINK_PATH = "//span[contains(text(), 'Box Library')]";
-    private static final String BOX_TEMPLATE_PATH = "//span[@class='name-wrapper']/span[contains(text(), 'Autotest template')]";
-
-    @FindBy(xpath = BOX_LIB_LINK_PATH)
+    @FindBy(xpath = "//span[contains(text(), 'Box Library')]")
     private WebElement boxLibLink;
 
-    @FindBy(xpath = BOX_TEMPLATE_PATH)
+    @FindBy(xpath = "//span[@class='name-wrapper']/span[contains(text(), 'Autotest template')]")
     private WebElement boxTemplate;
 
     public BoxLibraryPage(WebDriver driver) {

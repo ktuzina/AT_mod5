@@ -1,6 +1,6 @@
 package com.training.task.module5.pages;
 
-import org.openqa.selenium.By;
+import com.training.task.module5.utils.Constants;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,17 +11,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class OrderPage extends AbstractPage {
 
-    private static final String ORDER_STATUS_CLASS = "order-status";
-    private static final String PDF_1UP_BTN_PATH = "//div[@data-th='Actions']//button[1]";
-    private static final String CF2_1UP_BTN_PATH = "//div[@data-th='Actions']//button[2]";
-
-    @FindBy(className = ORDER_STATUS_CLASS)
+    @FindBy(className = "order-status")
     private WebElement orderStatus;
 
-    @FindBy(xpath = PDF_1UP_BTN_PATH)
+    @FindBy(xpath = "//div[@data-th='Actions']//button[1]")
     private WebElement pdf1UpBtn;
 
-    @FindBy(xpath = CF2_1UP_BTN_PATH)
+    @FindBy(xpath = "//div[@data-th='Actions']//button[2]")
     private WebElement cf21UpBtn;
 
     public OrderPage(WebDriver driver) {
@@ -42,8 +38,8 @@ public class OrderPage extends AbstractPage {
 
     public boolean download1upPDFisVisible() {
         try {
-            new WebDriverWait(driver, 15, 1000)
-                    .until(ExpectedConditions.elementToBeClickable(By.xpath(PDF_1UP_BTN_PATH)));
+            new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME)
+                    .until(ExpectedConditions.elementToBeClickable(pdf1UpBtn));
             return true;
         } catch (TimeoutException e) {
             return false;
@@ -52,8 +48,8 @@ public class OrderPage extends AbstractPage {
 
     public boolean download1upCF2isVisible() {
         try {
-            new WebDriverWait(driver, 15, 1000)
-                    .until(ExpectedConditions.elementToBeClickable(By.xpath(CF2_1UP_BTN_PATH)));
+            new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME)
+                    .until(ExpectedConditions.elementToBeClickable(cf21UpBtn));
             return true;
         } catch (TimeoutException e) {
             return false;

@@ -1,5 +1,6 @@
 package com.training.task.module5.pages;
 
+import com.training.task.module5.utils.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,13 +9,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PurchaseSuccessPage extends AbstractPage {
 
-    private static final String ORDER_NUMBER_PATH = "//div[@class='order-details']//a";
-    private static final String LOADING_ELEMENT_PATH = "//div[@class='loader']/img";
-
-    @FindBy(xpath = ORDER_NUMBER_PATH)
+    @FindBy(xpath = "//div[@class='order-details']//a")
     private WebElement orderNumber;
 
-    @FindBy(xpath = LOADING_ELEMENT_PATH)
+    @FindBy(xpath = "//div[@class='loader']/img")
     private WebElement loadingElement;
 
 
@@ -23,7 +21,7 @@ public class PurchaseSuccessPage extends AbstractPage {
     }
 
     public OrderPage goToOrderDetails() {
-        WebDriverWait wait = new WebDriverWait(driver, 15, 1000);
+        WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME);
         //wait.until(ExpectedConditions.invisibilityOf(loadingElement));
         wait.until(ExpectedConditions.elementToBeClickable(orderNumber)).click();
         return new OrderPage(driver);

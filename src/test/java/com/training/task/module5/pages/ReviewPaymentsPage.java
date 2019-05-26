@@ -1,5 +1,6 @@
 package com.training.task.module5.pages;
 
+import com.training.task.module5.utils.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,17 +9,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ReviewPaymentsPage extends AbstractPage {
 
-    private static final String CHECK_MONEY_RADIOBTN_PATH = "//*[@id='checkout-payment-method-load']/div/div/div[5]/div[1]/label/span";
-    private static final String PLACE_ORDER_BTN_PATH = "//div[contains(@class,'payment-method _active')]//button[@class='action primary checkout']";
-    private static final String LOADING_ELEMENT_PATH = "//div[@class='loader']//img";
-
-    @FindBy(xpath = CHECK_MONEY_RADIOBTN_PATH)
+    @FindBy(xpath = "//*[@id='checkout-payment-method-load']/div/div/div[5]/div[1]/label/span")
     private WebElement moneyRadioBtn;
 
-    @FindBy(xpath = PLACE_ORDER_BTN_PATH)
+    @FindBy(xpath = "//div[contains(@class,'payment-method _active')]//button[@class='action primary checkout']")
     private WebElement placeOrderBtn;
 
-    @FindBy(xpath = LOADING_ELEMENT_PATH)
+    @FindBy(xpath = "//div[@class='loader']//img")
     private WebElement loadingElement;
 
     public ReviewPaymentsPage(WebDriver driver) {
@@ -26,7 +23,7 @@ public class ReviewPaymentsPage extends AbstractPage {
     }
 
     public PurchaseSuccessPage selectCheckMoneyPaymentMethod() {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+        WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME);
 
         //wait.until(ExpectedConditions.invisibilityOf(loadingElement));
         wait.until(ExpectedConditions.elementToBeClickable(moneyRadioBtn)).click();
