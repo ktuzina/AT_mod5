@@ -1,33 +1,38 @@
 package com.training.task.module5.pages;
 
-import org.openqa.selenium.By;
+import com.training.task.module5.utils.Constants;
+import com.training.task.module5.utils.PropertyHandler;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends AbstractPage {
 
-    private static String LOGIN_LINK_PATH = "//div[@id='web2box-header']//div[@class='auth-not-logged-in']//a";
-    private static String EMAIL_FIELD_ID = "email";
-    private static String PASSWORD_FIELD_ID = "pass";
-    private static String SIGN_IN_BUTTON_ID = "send2";
+    @FindBy(xpath = "//div[@id='web2box-header']//div[@class='auth-not-logged-in']//a")
+    private WebElement loginLink;
+
+    @FindBy(id = "email")
+    private WebElement emailField;
+
+    @FindBy(id = "pass")
+    private WebElement passwordField;
+
+    @FindBy(id = "send2")
+    private WebElement signInBtn;
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    public void openLoginPage() {
-        WebElement loginLink = driver.findElement(By.xpath(LOGIN_LINK_PATH));
-        loginLink.click();
-    }
 
-    public void loginUser() throws InterruptedException {
-        WebElement emailField = driver.findElement(By.id(EMAIL_FIELD_ID));
-        WebElement passwordField = driver.findElement(By.id(PASSWORD_FIELD_ID));
-        WebElement signInBtn = driver.findElement(By.id(SIGN_IN_BUTTON_ID));
-        emailField.sendKeys("katsiaryna.tuzina@gersis-software.com");
-        passwordField.sendKeys("genTSY59YsEA4ZN");
+    public BoxLibraryPage loginUser() throws InterruptedException {
+        loginLink.click();
+        emailField.sendKeys(PropertyHandler.getCredentials().getUser());
+        passwordField.sendKeys(PropertyHandler.getCredentials().getPassword());
         signInBtn.click();
 
-        Thread.sleep(3000);
+        Thread.sleep(Constants.SLEEP_TIME);
+
+        return new BoxLibraryPage(driver);
     }
 }
