@@ -1,6 +1,7 @@
 package com.training.task.module5.pages;
 
 import com.training.task.module5.utils.Constants;
+import com.training.task.module5.utils.PropertyHandler;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,8 +27,8 @@ public class LoginPage extends AbstractPage {
 
     public BoxLibraryPage loginUser() throws InterruptedException {
         loginLink.click();
-        emailField.sendKeys(Constants.USER_EMAIL);
-        passwordField.sendKeys(Constants.USER_PASSWORD);
+        emailField.sendKeys(PropertyHandler.getCredentials().getUser());
+        passwordField.sendKeys(PropertyHandler.getCredentials().getPassword());
         signInBtn.click();
 
         Thread.sleep(Constants.SLEEP_TIME);
