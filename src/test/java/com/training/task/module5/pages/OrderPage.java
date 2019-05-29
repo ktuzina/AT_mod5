@@ -1,6 +1,7 @@
 package com.training.task.module5.pages;
 
 import com.training.task.module5.utils.Constants;
+import com.training.task.module5.utils.FilesHandler;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,12 +29,26 @@ public class OrderPage extends AbstractPage {
         return orderStatus.isDisplayed();
     }
 
-    public void download1upPDF() {
+    public boolean isNotEmpty1upPDF() {
         pdf1UpBtn.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        FilesHandler filesHandler = new FilesHandler(Constants.PDF_EXTENSION);
+        return filesHandler.isFileNotEmpty();
     }
 
-    public void download1upCF2() {
+    public boolean isNotEmpty1upCF2() {
         cf21UpBtn.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        FilesHandler filesHandler = new FilesHandler(Constants.CF2_EXTENSION);
+        return filesHandler.isFileNotEmpty();
     }
 
     public boolean download1upPDFisVisible() {
@@ -55,4 +70,6 @@ public class OrderPage extends AbstractPage {
             return false;
         }
     }
+
+
 }

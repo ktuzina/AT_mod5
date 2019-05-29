@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ReviewPaymentsPage extends AbstractPage {
 
-    @FindBy(xpath = "//*[@id='checkout-payment-method-load']/div/div/div[5]/div[1]/label/span")
+    @FindBy(xpath = "//*[@id='checkout-payment-method-load']//span[contains(text(), 'No Payment')]")
     private WebElement moneyRadioBtn;
 
     @FindBy(xpath = "//div[contains(@class,'payment-method _active')]//button[@class='action primary checkout']")
