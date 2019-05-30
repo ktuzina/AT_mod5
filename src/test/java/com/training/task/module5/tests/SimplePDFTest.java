@@ -9,9 +9,7 @@ import com.training.task.module5.utils.SetupDriver;
 import com.training.task.module5.utils.WaitUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,9 +20,10 @@ public class SimplePDFTest {
     private ProductPage productPage;
 
     @BeforeMethod(description = "Opens app and goes to Product page")
-    public void openProductPage() {
+    @Parameters({"browser"})
+    public void openProductPage(@Optional(value = "chrome") String browser) {
         FilesHandler.cleanDownloadDirectory();
-        SetupDriver setupDriver = new SetupDriver();
+        SetupDriver setupDriver = new SetupDriver(browser);
         driver = setupDriver.getDriver();
         driver.get(PropertyHandler.getTestUrl());
         WaitUtils.sleepSomeSecs();
