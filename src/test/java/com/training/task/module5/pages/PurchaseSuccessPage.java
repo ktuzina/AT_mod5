@@ -22,7 +22,6 @@ public class PurchaseSuccessPage extends AbstractPage {
 
     public OrderPage goToOrderDetails() {
         WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME);
-        //wait.until(ExpectedConditions.invisibilityOf(loadingElement));
         wait.until(ExpectedConditions.elementToBeClickable(orderNumber)).click();
         return new OrderPage(driver);
     }

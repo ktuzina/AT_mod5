@@ -25,7 +25,6 @@ public class ReviewPaymentsPage extends AbstractPage {
     public PurchaseSuccessPage selectCheckMoneyPaymentMethod() {
         WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME);
 
-        //wait.until(ExpectedConditions.invisibilityOf(loadingElement));
         wait.until(ExpectedConditions.elementToBeClickable(moneyRadioBtn)).click();
         wait.until(ExpectedConditions.visibilityOf(placeOrderBtn)).click();
 

@@ -2,6 +2,7 @@ package com.training.task.module5.pages;
 
 import com.training.task.module5.utils.Constants;
 import com.training.task.module5.utils.PropertyHandler;
+import com.training.task.module5.utils.WaitUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,13 +26,13 @@ public class LoginPage extends AbstractPage {
     }
 
 
-    public BoxLibraryPage loginUser() throws InterruptedException {
+    public BoxLibraryPage loginUser() {
         loginLink.click();
         emailField.sendKeys(PropertyHandler.getCredentials().getUser());
         passwordField.sendKeys(PropertyHandler.getCredentials().getPassword());
         signInBtn.click();
 
-        Thread.sleep(Constants.SLEEP_TIME);
+        WaitUtils.sleepSomeSecs();
 
         return new BoxLibraryPage(driver);
     }
