@@ -1,6 +1,9 @@
 package com.training.task.module5.pages;
 
 import com.training.task.module5.utils.Constants;
+import com.training.task.module5.utils.JSUtils;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,9 +14,6 @@ public class ProductPage extends AbstractPage {
 
     @FindBy(xpath = "//main[@id='maincontent']//span[@class='icon icon-more-vertical']")
     private WebElement options;
-
-    @FindBy(xpath = "//main[@id='maincontent']//button[@id='clone-style-btn']")
-    private WebElement cloneBtn;
 
     @FindBy(xpath = "//span[contains(text(), 'Create Clone')]")
     private WebElement createCloneBtn;
@@ -43,7 +43,8 @@ public class ProductPage extends AbstractPage {
 
     public void createClone() {
         options.click();
-        cloneBtn.click();
+        JSUtils jsUtils = new JSUtils(driver);
+        jsUtils.clickCloneBtn();
         createCloneBtn.click();
         new WebDriverWait(driver, Constants.LONG_WAIT_TIME, Constants.CHECK_INTERVAL_TIME)
                 .until(ExpectedConditions.invisibilityOf(loadingElement));
@@ -62,8 +63,12 @@ public class ProductPage extends AbstractPage {
     public ProductPage cancelPutToCartViaPDFDownload() {
         createClone();
         WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME);
-        wait.until(ExpectedConditions.elementToBeClickable(pdfDownloadBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(pdfDownloadBtn));
+        JSUtils jsUtils = new JSUtils(driver);
+        jsUtils.highlightElement(pdfDownloadBtn);
+        pdfDownloadBtn.click();
         wait.until(ExpectedConditions.elementToBeClickable(cancelPDFDownload)).click();
         return this;
     }
+
 }

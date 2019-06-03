@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ReviewPaymentsPage extends AbstractPage {
 
-    @FindBy(xpath = "//*[@id='checkout-payment-method-load']/div/div/div[5]/div[1]/label/span")
+    @FindBy(xpath = "//*[@id='checkout-payment-method-load']//span[contains(text(), 'No Payment')]")
     private WebElement moneyRadioBtn;
 
     @FindBy(xpath = "//div[contains(@class,'payment-method _active')]//button[@class='action primary checkout']")
@@ -25,7 +25,6 @@ public class ReviewPaymentsPage extends AbstractPage {
     public PurchaseSuccessPage selectCheckMoneyPaymentMethod() {
         WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME);
 
-        //wait.until(ExpectedConditions.invisibilityOf(loadingElement));
         wait.until(ExpectedConditions.elementToBeClickable(moneyRadioBtn)).click();
         wait.until(ExpectedConditions.visibilityOf(placeOrderBtn)).click();
 
