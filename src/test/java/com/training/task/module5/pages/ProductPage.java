@@ -1,5 +1,8 @@
 package com.training.task.module5.pages;
 
+import com.training.task.module5.pages.blocks.AddedToCartPopup;
+import com.training.task.module5.pages.blocks.ClonePopup;
+import com.training.task.module5.pages.blocks.PDFDownloadPopup;
 import com.training.task.module5.utils.Constants;
 import com.training.task.module5.utils.JSUtils;
 import org.openqa.selenium.JavascriptException;
@@ -7,31 +10,28 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.yandex.qatools.htmlelements.element.HtmlElement;
+import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
+import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
+import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 
 public class ProductPage extends AbstractPage {
+
+    private PDFDownloadPopup pdfDownloadPopup;
+    private AddedToCartPopup addedToCartPopup;
+    private ClonePopup clonePopup;
 
     @FindBy(xpath = "//main[@id='maincontent']//span[@class='icon icon-more-vertical']")
     private WebElement options;
 
-    @FindBy(xpath = "//span[contains(text(), 'Create Clone')]")
-    private WebElement createCloneBtn;
-
     @FindBy(id = "w2b-simple-pdf-btn")
     private WebElement pdfDownloadBtn;
 
-    @FindBy(xpath = "//aside[contains(@class, 'simplepdf-modal')]//span[contains(text(), 'Add to Cart')]")
-    private WebElement addToCartBtn;
-
-    @FindBy(className = "proceed-checkout")
-    private WebElement proceedCheckoutBtn;
-
     @FindBy(xpath = "//div[@class=\'loader\']/img")
     private WebElement loadingElement;
-
-    @FindBy(xpath = "//aside[contains(@class, 'simplepdf-modal')]//span[contains(text(), 'Cancel')]")
-    private WebElement cancelPDFDownload;
 
     public ProductPage(WebDriver driver) {
         super(driver);
@@ -45,7 +45,7 @@ public class ProductPage extends AbstractPage {
         options.click();
         JSUtils jsUtils = new JSUtils(driver);
         jsUtils.clickCloneBtn();
-        createCloneBtn.click();
+        clonePopup.confirmCloneCreation(driver);
         new WebDriverWait(driver, Constants.LONG_WAIT_TIME, Constants.CHECK_INTERVAL_TIME)
                 .until(ExpectedConditions.invisibilityOf(loadingElement));
     }
@@ -54,8 +54,8 @@ public class ProductPage extends AbstractPage {
         createClone();
         WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME);
         wait.until(ExpectedConditions.elementToBeClickable(pdfDownloadBtn)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(proceedCheckoutBtn)).click();
+        pdfDownloadPopup.addToCart(driver);
+        addedToCartPopup.proceedToCheckout(driver);
 
         return new ReviewPaymentsPage(driver);
     }
@@ -67,7 +67,7 @@ public class ProductPage extends AbstractPage {
         JSUtils jsUtils = new JSUtils(driver);
         jsUtils.highlightElement(pdfDownloadBtn);
         pdfDownloadBtn.click();
-        wait.until(ExpectedConditions.elementToBeClickable(cancelPDFDownload)).click();
+        pdfDownloadPopup.cancelAddToCart(driver);
         return this;
     }
 
