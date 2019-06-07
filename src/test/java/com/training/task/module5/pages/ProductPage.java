@@ -4,19 +4,13 @@ import com.training.task.module5.pages.blocks.AddedToCartPopup;
 import com.training.task.module5.pages.blocks.ClonePopup;
 import com.training.task.module5.pages.blocks.PDFDownloadPopup;
 import com.training.task.module5.utils.Constants;
+import com.training.task.module5.utils.CustomWebElement;
 import com.training.task.module5.utils.JSUtils;
-import org.openqa.selenium.JavascriptException;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.yandex.qatools.htmlelements.element.HtmlElement;
-import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
-import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementDecorator;
-import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 
 public class ProductPage extends AbstractPage {
 
@@ -35,6 +29,7 @@ public class ProductPage extends AbstractPage {
 
     public ProductPage(WebDriver driver) {
         super(driver);
+        pdfDownloadBtn = new CustomWebElement(pdfDownloadBtn, driver);
     }
 
     public boolean pageIsDisplayed() {
@@ -64,8 +59,6 @@ public class ProductPage extends AbstractPage {
         createClone();
         WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME);
         wait.until(ExpectedConditions.elementToBeClickable(pdfDownloadBtn));
-        JSUtils jsUtils = new JSUtils(driver);
-        jsUtils.highlightElement(pdfDownloadBtn);
         pdfDownloadBtn.click();
         pdfDownloadPopup.cancelAddToCart(driver);
         return this;

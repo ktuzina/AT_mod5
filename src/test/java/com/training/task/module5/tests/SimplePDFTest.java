@@ -1,11 +1,11 @@
 package com.training.task.module5.tests;
 
+import com.training.task.module5.factory.WebDriverFactory;
 import com.training.task.module5.pages.LoginPage;
 import com.training.task.module5.pages.OrderPage;
 import com.training.task.module5.pages.ProductPage;
 import com.training.task.module5.utils.FilesHandler;
 import com.training.task.module5.utils.PropertyHandler;
-import com.training.task.module5.utils.SetupDriver;
 import com.training.task.module5.utils.WaitUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
@@ -23,8 +23,8 @@ public class SimplePDFTest {
     @Parameters({"browser"})
     public void openProductPage(@Optional(value = "chrome") String browser) {
         FilesHandler.cleanDownloadDirectory();
-        SetupDriver setupDriver = new SetupDriver(browser);
-        driver = setupDriver.getDriver();
+        WebDriverFactory factory = new WebDriverFactory(browser);
+        driver = factory.getDriver();
         driver.get(PropertyHandler.getTestUrl());
         WaitUtils.sleepSomeSecs();
         productPage = new LoginPage(driver).loginUser().openLibraryAndSelectBox();
