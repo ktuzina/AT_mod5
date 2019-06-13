@@ -4,21 +4,21 @@ import org.openqa.selenium.WebDriver;
 
 public class WebDriverFactory {
 
-    private WebDriver driver;
-    private String browser;
+    private static WebDriver driver;
+    private static String browser;
 
     public WebDriverFactory(String browser) {
         this.browser = browser;
     }
 
-    public WebDriver getDriver() {
+    public static WebDriver getDriver() {
         if (driver == null) {
             setDriver();
         }
         return driver;
     }
 
-    public WebDriver setDriver() {
+    public static WebDriver setDriver() {
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverCreator creatorGHDriver = new ChromeDriverCreator();
             driver = creatorGHDriver.createDriver();
@@ -27,5 +27,10 @@ public class WebDriverFactory {
             driver = creatorFFDriver.createDriver();
         }
         return driver;
+    }
+
+    public static void killDriver() {
+        driver.quit();
+        driver = null;
     }
 }

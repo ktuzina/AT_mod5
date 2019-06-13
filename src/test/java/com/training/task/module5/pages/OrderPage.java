@@ -31,15 +31,11 @@ public class OrderPage extends AbstractPage {
     }
 
     public boolean isNotEmpty1upPDF() {
-        pdf1UpBtn.click();
-        WaitUtils.sleepSomeSecs();
         FilesHandler filesHandler = new FilesHandler(Constants.PDF_EXTENSION);
         return filesHandler.isFileNotEmpty();
     }
 
     public boolean isNotEmpty1upCF2() {
-        cf21UpBtn.click();
-        WaitUtils.sleepSomeSecs();
         FilesHandler filesHandler = new FilesHandler(Constants.CF2_EXTENSION);
         return filesHandler.isFileNotEmpty();
     }
@@ -62,6 +58,18 @@ public class OrderPage extends AbstractPage {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+
+    public OrderPage download1upPDF() {
+        pdf1UpBtn.click();
+        WaitUtils.sleepSomeSecs();
+        return this;
+    }
+
+    public OrderPage download1upCF2() {
+        cf21UpBtn.click();
+        WaitUtils.sleepSomeSecs();
+        return this;
     }
 
 
