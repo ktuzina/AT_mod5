@@ -47,8 +47,7 @@ public class ProductPage extends AbstractPage {
 
     public ReviewPaymentsPage putToCartViaPDFDownload() {
         createClone();
-        WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME);
-        wait.until(ExpectedConditions.elementToBeClickable(pdfDownloadBtn)).click();
+        openSimplePDFPopup();
         pdfDownloadPopup.addToCart(driver);
         addedToCartPopup.proceedToCheckout(driver);
 
@@ -57,11 +56,18 @@ public class ProductPage extends AbstractPage {
 
     public ProductPage cancelPutToCartViaPDFDownload() {
         createClone();
-        WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME);
-        wait.until(ExpectedConditions.elementToBeClickable(pdfDownloadBtn));
-        pdfDownloadBtn.click();
-        pdfDownloadPopup.cancelAddToCart(driver);
+        openSimplePDFPopup();
+        cancelSimplePDF();
         return this;
+    }
+
+    public void openSimplePDFPopup() {
+        WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME);
+        wait.until(ExpectedConditions.elementToBeClickable(pdfDownloadBtn)).click();
+    }
+
+    public void cancelSimplePDF() {
+        pdfDownloadPopup.cancelAddToCart(driver);
     }
 
 }

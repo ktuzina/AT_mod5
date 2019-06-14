@@ -35,8 +35,8 @@ public class SimplePDFTest {
         OrderPage orderPage = productPage.putToCartViaPDFDownload().selectCheckMoneyPaymentMethod().goToOrderDetails();
 
         SoftAssertions sa = new SoftAssertions();
-        sa.assertThat(orderPage.isNotEmpty1upPDF()).as("1up-PDF file is empty").isTrue();
-        sa.assertThat(orderPage.isNotEmpty1upCF2()).as("1up-CF2 file is empty").isTrue();
+        sa.assertThat(orderPage.download1upPDF().isNotEmpty1upPDF()).as("1up-PDF file is empty").isTrue();
+        sa.assertThat(orderPage.download1upCF2().isNotEmpty1upCF2()).as("1up-CF2 file is empty").isTrue();
     }
 
     @Test(description = "Test cancels ordering Simple PDF")
