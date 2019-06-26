@@ -20,12 +20,13 @@ public class SimplePDFTest {
 
     private WebDriver driver;
     private ProductPage productPage;
+    private WebDriverFactory factory;
 
     @BeforeMethod(description = "Opens app and goes to Product page")
     @Parameters({"browser"})
     public void openProductPage(@Optional(value = "chrome") String browser) {
         FilesHandler.cleanDownloadDirectory();
-        WebDriverFactory factory = new WebDriverFactory(browser);
+        factory = new WebDriverFactory(browser);
         driver = factory.getDriver();
         driver.get(PropertyHandler.getTestUrl());
         WaitUtils.sleepSomeSecs();
@@ -52,8 +53,7 @@ public class SimplePDFTest {
         if (testResult.getStatus() == ITestResult.FAILURE) {
             BrowserUtils.takeScreenshot(driver);
         }
-        driver.quit();
-        driver = null;
+        factory.killDriver();
     }
 
 }
