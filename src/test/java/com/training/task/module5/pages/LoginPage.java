@@ -1,6 +1,7 @@
 package com.training.task.module5.pages;
 
-import com.training.task.module5.utils.Constants;
+import com.training.task.module5.utils.BrowserUtils;
+import com.training.task.module5.utils.Log;
 import com.training.task.module5.utils.PropertyHandler;
 import com.training.task.module5.utils.WaitUtils;
 import org.openqa.selenium.WebDriver;
@@ -27,10 +28,12 @@ public class LoginPage extends AbstractPage {
 
 
     public BoxLibraryPage loginUser() {
-        loginLink.click();
+        BrowserUtils.click(loginLink, driver);
+        Log.info("Enter email address");
         emailField.sendKeys(PropertyHandler.getCredentials().getUser());
+        Log.info("Enter password");
         passwordField.sendKeys(PropertyHandler.getCredentials().getPassword());
-        signInBtn.click();
+        BrowserUtils.click(signInBtn, driver);
 
         WaitUtils.sleepSomeSecs();
 

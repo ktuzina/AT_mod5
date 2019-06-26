@@ -1,11 +1,8 @@
 package com.training.task.module5.pages.blocks;
 
-import com.training.task.module5.utils.Constants;
+import com.training.task.module5.utils.BrowserUtils;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.element.Button;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
@@ -19,13 +16,11 @@ public class PDFDownloadPopup extends HtmlElement {
     private Button cancelPDFDownload;
 
     public void cancelAddToCart(WebDriver driver) {
-        new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME)
-                .until(ExpectedConditions.elementToBeClickable(cancelPDFDownload)).click();
+        BrowserUtils.click(cancelPDFDownload, driver);
     }
 
     public void addToCart(WebDriver driver) {
-        new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME)
-                .until(ExpectedConditions.elementToBeClickable(addToCart)).click();
+        BrowserUtils.click(addToCart, driver);
     }
 
 }

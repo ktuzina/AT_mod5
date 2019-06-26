@@ -1,5 +1,6 @@
 package com.training.task.module5.pages;
 
+import com.training.task.module5.utils.BrowserUtils;
 import com.training.task.module5.utils.Constants;
 import com.training.task.module5.utils.FilesHandler;
 import com.training.task.module5.utils.WaitUtils;
@@ -61,13 +62,13 @@ public class OrderPage extends AbstractPage {
     }
 
     public OrderPage download1upPDF() {
-        pdf1UpBtn.click();
+        BrowserUtils.click(pdf1UpBtn, driver);
         WaitUtils.sleepSomeSecs();
         return this;
     }
 
     public OrderPage download1upCF2() {
-        cf21UpBtn.click();
+        BrowserUtils.click(cf21UpBtn, driver);
         WaitUtils.sleepSomeSecs();
         return this;
     }

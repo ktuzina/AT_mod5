@@ -3,9 +3,7 @@ package com.training.task.module5.pages;
 import com.training.task.module5.pages.blocks.AddedToCartPopup;
 import com.training.task.module5.pages.blocks.ClonePopup;
 import com.training.task.module5.pages.blocks.PDFDownloadPopup;
-import com.training.task.module5.utils.Constants;
-import com.training.task.module5.utils.CustomWebElement;
-import com.training.task.module5.utils.JSUtils;
+import com.training.task.module5.utils.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,12 +35,13 @@ public class ProductPage extends AbstractPage {
     }
 
     public void createClone() {
-        options.click();
+        BrowserUtils.click(options, driver);
         JSUtils jsUtils = new JSUtils(driver);
         jsUtils.clickCloneBtn();
         clonePopup.confirmCloneCreation(driver);
         new WebDriverWait(driver, Constants.LONG_WAIT_TIME, Constants.CHECK_INTERVAL_TIME)
                 .until(ExpectedConditions.invisibilityOf(loadingElement));
+        Log.debug("Clone is created");
     }
 
     public ReviewPaymentsPage putToCartViaPDFDownload() {
@@ -63,6 +62,7 @@ public class ProductPage extends AbstractPage {
 
     public void openSimplePDFPopup() {
         WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME);
+        Log.info("Clicking element '" + pdfDownloadBtn.getText() + "'");
         wait.until(ExpectedConditions.elementToBeClickable(pdfDownloadBtn)).click();
     }
 

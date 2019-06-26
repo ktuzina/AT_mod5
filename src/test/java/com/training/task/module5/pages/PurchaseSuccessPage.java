@@ -1,11 +1,9 @@
 package com.training.task.module5.pages;
 
-import com.training.task.module5.utils.Constants;
+import com.training.task.module5.utils.BrowserUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PurchaseSuccessPage extends AbstractPage {
 
@@ -21,8 +19,7 @@ public class PurchaseSuccessPage extends AbstractPage {
     }
 
     public OrderPage goToOrderDetails() {
-        WebDriverWait wait = new WebDriverWait(driver, Constants.WAIT_TIME, Constants.CHECK_INTERVAL_TIME);
-        wait.until(ExpectedConditions.elementToBeClickable(orderNumber)).click();
+        BrowserUtils.click(orderNumber, driver);
         return new OrderPage(driver);
     }
 }

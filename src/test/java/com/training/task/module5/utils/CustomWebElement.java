@@ -18,6 +18,7 @@ public class CustomWebElement implements WebElement {
     public void click() {
         JSUtils jsUtils = new JSUtils(driver);
         jsUtils.highlightElement(webElement);
+        jsUtils.unhighlightElement(webElement);
         webElement.click();
     }
 

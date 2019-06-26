@@ -1,10 +1,11 @@
 package com.training.task.module5.utils;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.io.FileUtils;
 
 public class FilesHandler {
 
@@ -19,7 +20,7 @@ public class FilesHandler {
     public boolean isFileNotEmpty() {
         getFilesByExtention();
         File file = new File(Constants.DOWNLOAD_PATH + "\\" + this.filesList.get(0));
-
+        Log.debug("File '" + this.filesList.get(0) + "' size is " + file.length());
         if (file.length() != 0) {
             return true;
         } else {
@@ -32,6 +33,7 @@ public class FilesHandler {
         for (File file : dir.listFiles()) {
             if (file.getName().endsWith((fileExtention))) {
                 this.filesList.add(file.getName());
+                Log.debug("File with name '" + file.getName() + "' found");
             }
         }
     }
@@ -43,5 +45,6 @@ public class FilesHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Log.info("Directory '" + Constants.DOWNLOAD_PATH + "' is cleaned");
     }
 }
