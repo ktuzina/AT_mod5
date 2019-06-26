@@ -1,9 +1,6 @@
 package com.training.task.module5.pages;
 
-import com.training.task.module5.utils.BrowserUtils;
-import com.training.task.module5.utils.Constants;
-import com.training.task.module5.utils.FilesHandler;
-import com.training.task.module5.utils.WaitUtils;
+import com.training.task.module5.utils.*;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,6 +44,7 @@ public class OrderPage extends AbstractPage {
                     .until(ExpectedConditions.elementToBeClickable(pdf1UpBtn));
             return true;
         } catch (TimeoutException e) {
+            Log.error("Download 1-up PDF button is not clickable");
             return false;
         }
     }
@@ -57,6 +55,7 @@ public class OrderPage extends AbstractPage {
                     .until(ExpectedConditions.elementToBeClickable(cf21UpBtn));
             return true;
         } catch (TimeoutException e) {
+            Log.error("Download 1-up CF2 button is not clickable");
             return false;
         }
     }

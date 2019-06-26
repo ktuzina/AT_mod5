@@ -15,6 +15,7 @@ public class PropertyHandler {
             prop = new Properties();
             this.prop.load(input);
         } catch (IOException ex) {
+            Log.error("Failed to read data from properties file");
             ex.printStackTrace();
         }
     }

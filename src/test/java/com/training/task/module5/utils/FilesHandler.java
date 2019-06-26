@@ -42,9 +42,10 @@ public class FilesHandler {
         File dir = new File(Constants.DOWNLOAD_PATH);
         try {
             FileUtils.cleanDirectory(dir);
+            Log.info("Directory '" + Constants.DOWNLOAD_PATH + "' is cleaned");
         } catch (IOException e) {
+            Log.error("Failed to clean directory '" + Constants.DOWNLOAD_PATH);
             e.printStackTrace();
         }
-        Log.info("Directory '" + Constants.DOWNLOAD_PATH + "' is cleaned");
     }
 }
