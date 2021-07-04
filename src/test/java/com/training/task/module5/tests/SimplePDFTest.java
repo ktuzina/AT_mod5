@@ -4,11 +4,13 @@ import com.training.task.module5.factory.WebDriverFactory;
 import com.training.task.module5.pages.LoginPage;
 import com.training.task.module5.pages.OrderPage;
 import com.training.task.module5.pages.ProductPage;
+import com.training.task.module5.utils.BrowserUtils;
 import com.training.task.module5.utils.FilesHandler;
 import com.training.task.module5.utils.PropertyHandler;
 import com.training.task.module5.utils.WaitUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,12 +20,13 @@ public class SimplePDFTest {
 
     private WebDriver driver;
     private ProductPage productPage;
+    private WebDriverFactory factory;
 
     @BeforeMethod(description = "Opens app and goes to Product page")
     @Parameters({"browser"})
     public void openProductPage(@Optional(value = "chrome") String browser) {
         FilesHandler.cleanDownloadDirectory();
-        WebDriverFactory factory = new WebDriverFactory(browser);
+        factory = new WebDriverFactory(browser);
         driver = factory.getDriver();
         driver.get(PropertyHandler.getTestUrl());
         WaitUtils.sleepSomeSecs();
@@ -46,9 +49,11 @@ public class SimplePDFTest {
     }
 
     @AfterMethod
-    public void closeBrowser() {
-        driver.quit();
-        driver = null;
+    public void closeBrowser(ITestResult testResult) {
+        if (testResult.getStatus() == ITestResult.FAILURE) {
+            BrowserUtils.takeScreenshot(driver);
+        }
+        factory.killDriver();
     }
 
 }

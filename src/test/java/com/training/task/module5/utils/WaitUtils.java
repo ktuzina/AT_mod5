@@ -6,6 +6,7 @@ public class WaitUtils {
         try {
             Thread.sleep(Constants.SLEEP_TIME);
         } catch (InterruptedException e) {
+            Log.error("Thread is interrupted");
             e.printStackTrace();
         }
     }

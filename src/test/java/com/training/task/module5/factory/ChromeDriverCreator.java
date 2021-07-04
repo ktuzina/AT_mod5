@@ -1,6 +1,7 @@
 package com.training.task.module5.factory;
 
 import com.training.task.module5.utils.Constants;
+import com.training.task.module5.utils.Log;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -25,6 +26,7 @@ public class ChromeDriverCreator extends WebDriverCreator {
         try {
             driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
         } catch (MalformedURLException e) {
+            Log.error("Failed to create driver for Chrome browser");
             e.printStackTrace();
         }
         driver.manage().window().maximize();

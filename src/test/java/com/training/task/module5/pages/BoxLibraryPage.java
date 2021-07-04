@@ -1,5 +1,6 @@
 package com.training.task.module5.pages;
 
+import com.training.task.module5.utils.BrowserUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,8 +19,8 @@ public class BoxLibraryPage extends AbstractPage {
 
 
     public ProductPage openLibraryAndSelectBox() {
-        boxLibLink.click();
-        boxTemplate.click();
+        BrowserUtils.click(boxLibLink, driver);
+        BrowserUtils.click(boxTemplate, driver);
         return new ProductPage(driver);
     }
 }

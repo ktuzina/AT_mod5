@@ -8,6 +8,7 @@ public class JSUtils {
 
     private JavascriptExecutor js;
     private WebDriver driver;
+    private String bgColor;
 
     public JSUtils(WebDriver driver) {
         this.driver = driver;
@@ -19,9 +20,12 @@ public class JSUtils {
     }
 
     public void highlightElement(WebElement element) {
-        String bgColor = element.getCssValue("backgroundColor");
+        bgColor = element.getCssValue("backgroundColor");
         js.executeScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", element);
         WaitUtils.sleepSomeSecs();
+    }
+
+    public void unhighlightElement(WebElement element) {
         js.executeScript("arguments[0].style.backgroundColor = '" + bgColor + "'", element);
     }
 }
